@@ -1,4 +1,4 @@
-# My GitHubs
+# Local Repo Panel — Local Repository & Dev Server Dashboard
 
 A local dashboard for browsing and running the projects in `~/github`. Search and sort your folders, open app and repository links, and manage development processes from one table.
 
@@ -7,6 +7,8 @@ A local dashboard for browsing and running the projects in `~/github`. Search an
 Requires **Node.js 22+**, npm, and macOS or Linux. Restart also requires `lsof`; project commands may require tools such as Make, Python, or their own dependencies.
 
 ```sh
+git clone https://github.com/scyllarusllc/local-repo-panel.git
+cd local-repo-panel
 npm ci
 npm start
 ```

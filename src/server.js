@@ -154,4 +154,4 @@ async function route(req,res) {
   }
   send(res,404,{error:'Not found'});
 }
-const server = createServer((req,res)=>{ if(!['127.0.0.1','::1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress)) return send(res,403,{error:'Local access only'}); route(req,res).catch(e=>send(res,500,{error:e.message})); }).listen(port,'127.0.0.1',()=>console.log(`My GitHubs: http://127.0.0.1:${server.address().port}`));
+const server = createServer((req,res)=>{ if(!['127.0.0.1','::1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress)) return send(res,403,{error:'Local access only'}); route(req,res).catch(e=>send(res,500,{error:e.message})); }).listen(port,'127.0.0.1',()=>console.log(`Local Repo Panel: http://127.0.0.1:${server.address().port}`));

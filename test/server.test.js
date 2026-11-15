@@ -8,7 +8,7 @@ import { createHash } from 'node:crypto';
 import { setTimeout as delay } from 'node:timers/promises';
 
 test('settings persist and remain isolated between project roots; managed processes stop', async () => {
-  const temp = await mkdtemp(join(tmpdir(), 'my-githubs-'));
+  const temp = await mkdtemp(join(tmpdir(), 'local-repo-panel-'));
   let server;
   let base;
   const roots = [join(temp,'a'),join(temp,'b')];
@@ -17,7 +17,7 @@ test('settings persist and remain isolated between project roots; managed proces
     // Read the actual ephemeral address from the startup log.
     let output='';
     await new Promise((resolve,reject)=>{
-      server.stdout.on('data',data=>{output+=data; if(output.includes('My GitHubs:')) resolve();});
+      server.stdout.on('data',data=>{output+=data; if(output.includes('Local Repo Panel:')) resolve();});
       server.once('error',reject); server.once('exit',()=>reject(Error('Server exited before startup')));
     });
     base=output.match(/http:\/\/127\.0\.0\.1:\d+/)[0];
