@@ -1,3 +1,4 @@
+import { githubUpdatedAt } from './github.js';
 import { createHash } from 'node:crypto';
 import { setTimeout as delay } from 'node:timers/promises';
 import { createServer } from 'node:http';
@@ -106,7 +107,10 @@ async function projects() {
     const inferredUrl=makePort||documentedPort ? `http://127.0.0.1:${makePort||documentedPort}` : '';
     const appUrl=c.url||inferredUrl;
     const managed=running.has(e.name), reachable=appUrl ? await portOpen(appUrl) : false;
-    return {name:e.name,path,created_at:s.birthtime.toISOString(),updated_at:s.mtime.toISOString(),description:pkg.description||'',link:c.link||pkg.homepage||await gitUrl(path),command:c.command??(devTarget?'make dev':''),url:appUrl,running:managed||reachable,managed,reachable,pid:running.get(e.name)?.pid||null};
+    const origin=await gitUrl(path);
+    const link=c.link||pkg.homepage||origin;
+    const github_updated_at=githubUpdatedAt(origin || link);
+    return {github_updated_at,name:e.name,path,created_at:s.birthtime.toISOString(),updated_at:s.mtime.toISOString(),description:pkg.description||'',link,command:c.command??(devTarget?'make dev':''),url:appUrl,running:managed||reachable,managed,reachable,pid:running.get(e.name)?.pid||null};
   }));
 }
 async function route(req,res) {

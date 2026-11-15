@@ -4,7 +4,7 @@ const safeUrl=s=>/^https?:\/\//i.test(s||'')?s:'';
 const date=s=>new Date(s).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
 function render(){
   const q=$('#search').value.toLowerCase(),sort=$('#sort').value;
-  const filtered=items.filter(p=>p.name.toLowerCase().includes(q)||p.description.toLowerCase().includes(q)).sort((a,b)=>sort==='name'?a.name.localeCompare(b.name):new Date(b[sort])-new Date(a[sort]));
+  const filtered=items.filter(p=>p.name.toLowerCase().includes(q)||p.description.toLowerCase().includes(q)).sort((a,b)=>sort==='name'?a.name.localeCompare(b.name):(Date.parse(b[sort])||0)-(Date.parse(a[sort])||0));
   $('#count').textContent=`${filtered.length} / ${items.length} projects`;
   $('#list').innerHTML=filtered.map(p=>`<tr>
     <td><strong>${esc(p.name)}</strong><small>${esc(p.description||p.path)}</small></td>
@@ -12,9 +12,9 @@ function render(){
     <td><code>${esc(p.command||'Not configured')}</code></td>
     <td>${safeUrl(p.url)?`<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.url)} ↗</a>`:'—'}</td>
     <td>${safeUrl(p.link)?`<a href="${esc(p.link)}" target="_blank" rel="noopener">Repository ↗</a>`:'—'}</td>
-    <td>${date(p.updated_at)}</td><td>${date(p.created_at)}</td>
+    <td>${date(p.updated_at)}</td><td>${date(p.created_at)}</td><td title="${esc(p.github_updated_at || 'GitHub data unavailable or loading')}">${p.github_updated_at?date(p.github_updated_at):'—'}</td>
     <td><div class="row-actions">${p.managed?`<button data-action="stop" data-name="${esc(p.name)}" class="primary">Stop</button>`:p.reachable?`<span class="external-note" title="This process was not started by Local Repo Panel">External</span>`:`<button data-action="start" data-name="${esc(p.name)}" class="primary">Start</button>`}<button class="restart" title="Free the app port and launch the saved command" data-action="restart" data-name="${esc(p.name)}">↻ Restart</button><button data-action="settings" data-name="${esc(p.name)}">Edit</button></div></td>
-  </tr>`).join('')||'<tr><td colspan="8" class="empty">No projects found.</td></tr>';
+  </tr>`).join('')||'<tr><td colspan="9" class="empty">No projects found.</td></tr>';
   for(const button of document.querySelectorAll('[data-action]')) {
     const action=pending.get(button.dataset.name);
     if(action) {button.disabled=true;if(button.dataset.action===action) {button.textContent={restart:'Restarting…',start:'Starting…',stop:'Stopping…'}[action];button.setAttribute('aria-busy','true');}}

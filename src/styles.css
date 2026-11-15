@@ -43,6 +43,6 @@
   .empty { @apply py-12 text-center text-slate-500; }
 }
 @layer components {
-  td:nth-child(6), td:nth-child(7) { @apply whitespace-nowrap text-xs; }
+  td:nth-child(6), td:nth-child(7), td:nth-child(8) { @apply whitespace-nowrap text-xs; }
   .row-actions { @apply justify-end; }
 }

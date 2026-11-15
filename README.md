@@ -79,3 +79,7 @@ Start and dev compile CSS automatically. After editing styles while the dev serv
 - **Start fails:** check the error message and `data/logs/`, then run the saved command in the project directory to check its dependencies. Set project-specific ports in the project's command or configuration.
 - **Restart reports Not found:** restart the dashboard server after backend changes, then refresh the page. Static frontend files can update while an older backend is still running.
 - **Stop times out:** inspect the project process or use Restart when a local App URL is configured.
+
+### GitHub update timestamps
+
+The GitHub updated column shows the repository `updated_at` timestamp (repository activity, not specifically the latest code push). It uses the Git origin, falling back to a GitHub project link. Install GitHub CLI and run `gh auth login` to enable lookups, including private repositories accessible to your account. Lookups run in the background and are cached for five minutes; the next automatic refresh displays the result. Unavailable or pending values show an em dash. You can also sort by GitHub update time.
