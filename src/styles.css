@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@source "../public";
+@layer base {
+  body { @apply m-0 bg-slate-950 font-sans text-slate-200 antialiased; }
+  button { @apply inline-flex h-9 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-700 bg-slate-800 px-3 text-xs font-semibold text-slate-200 transition hover:border-slate-500 hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 disabled:cursor-wait disabled:opacity-50; }
+  input, select { @apply h-11 rounded-lg border border-slate-700 bg-slate-900 px-3 text-sm text-slate-200 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20; }
+  th { @apply whitespace-nowrap bg-slate-900 px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-slate-500; }
+  td { @apply border-t border-slate-800/80 px-4 py-4 align-middle text-sm text-slate-400; }
+  td:first-child { @apply min-w-60 max-w-80; }
+  td strong { @apply block truncate text-sm font-semibold text-slate-100; }
+  td small { @apply mt-1 block truncate text-xs text-slate-500; }
+  td a { @apply whitespace-nowrap text-xs text-sky-400 hover:text-sky-300 hover:underline; }
+  td code { @apply whitespace-nowrap rounded-md bg-slate-800 px-2 py-1 font-mono text-xs text-slate-300; }
+  tbody tr { @apply transition-colors hover:bg-slate-800/30; }
+  dialog { @apply fixed inset-0 m-auto w-[calc(100%-2rem)] max-w-lg rounded-2xl border border-slate-700 bg-slate-900 p-6 text-slate-200 shadow-2xl; }
+  dialog::backdrop { @apply bg-slate-950/80 backdrop-blur-sm; }
+  dialog h2 { @apply mb-6 text-xl font-semibold tracking-tight; }
+  dialog label { @apply mb-4 block text-sm font-medium text-slate-400; }
+  dialog input { @apply mt-2 block w-full; }
+}
+@layer components {
+  header { @apply border-b border-slate-800 bg-slate-900/50; }
+  .eyebrow { @apply text-[10px] font-bold uppercase tracking-[0.2em] text-sky-400; }
+  h1 { @apply mt-2 text-3xl font-semibold tracking-tight text-white; }
+  header p { @apply mt-2 text-sm text-slate-500; }
+  header code { @apply text-slate-300; }
+  .count { @apply rounded-full border border-slate-700 bg-slate-800/70 px-3 py-1.5 text-xs font-medium text-slate-300; }
+  .toolbar { @apply mb-4 flex flex-wrap items-center gap-3; }
+  #search { @apply min-w-48 flex-1; }
+  #refresh { @apply h-11 px-4; }
+  #notice { @apply mb-4 min-h-5 whitespace-pre-wrap break-words text-xs text-sky-300; }
+  .table-wrap { @apply overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/40; }
+  table { @apply w-full border-collapse; }
+  .status { @apply inline-flex items-center whitespace-nowrap rounded-full bg-slate-800 px-2.5 py-1 text-[11px] font-medium text-slate-400 ring-1 ring-inset ring-slate-700; }
+  .status.on { @apply bg-emerald-400/10 text-emerald-300 ring-emerald-400/20; }
+  .row-actions { @apply flex items-center gap-2; }
+  button.primary, #save { @apply border-sky-500/30 bg-sky-500/15 text-sky-300 hover:bg-sky-500/25; }
+  button.restart { @apply border-slate-600 bg-slate-800 text-slate-200 hover:bg-slate-700; }
+  button[aria-busy="true"] { @apply text-amber-300 opacity-100; }
+  .external-note { @apply hidden; }
+  .hint { @apply text-xs leading-6 text-slate-500; }
+  .dialog-actions { @apply mt-6 flex justify-end gap-2 border-t border-slate-800 pt-5; }
+  .empty { @apply py-12 text-center text-slate-500; }
+}
+@layer components {
+  td:nth-child(6), td:nth-child(7) { @apply whitespace-nowrap text-xs; }
+  .row-actions { @apply justify-end; }
+}

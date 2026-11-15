@@ -1,0 +1,21 @@
+{
+  "name": "my-githubs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "test": "node --test",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./public/style.css --minify",
+    "prestart": "npm run build:css",
+    "predev": "npm run build:css"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "tailwindcss": "^4.3.5"
+  }
+}
